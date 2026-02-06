@@ -1,0 +1,44 @@
+# Plugin created by mike | https://github.com/PluginSmith07
+
+# Global prefix for all messages
+prefix: "&8[&eѕєℓℓɢυι&8] "
+
+# Basic messages
+player-only: "{prefix}&cOnly players can use this."
+no-permission: "{prefix}&cYou do not have permission."
+economy-missing: "{prefix}&cEconomy provider not found."
+world-blocked: "{prefix}&cSelling is disabled in this world."
+item-blacklisted: "{prefix}&cThat item cannot be sold."
+item-disabled: "{prefix}&cThat item is currently disabled."
+nothing-to-sell: "{prefix}&cYou have nothing to sell."
+cooldown: "{prefix}&cPlease wait {seconds}s before selling again."
+sell-usage: "{prefix}&7Use &e/sell handitem &7or &e/sell inventory"
+
+# Success message
+sell-success: "{prefix}&aʏσυ ѕσℓ∂ {amount} ɪᴛᴇᴍѕ ғᴏʀ {total}{currency}"
+
+# Admin messages
+admin-help: "{prefix}&7Commands: &e/sellguiadmin config &7| &e/sellguiadmin reload &7| &e/sellguiadmin help"
+admin-set-price: "{prefix}&7Type a new price in chat."
+admin-set-slot: "{prefix}&7Type a new slot (0-53) in chat."
+admin-invalid-number: "{prefix}&cInvalid number."
+admin-price-set: "{prefix}&aPrice updated to {price}."
+admin-slot-set: "{prefix}&aSlot updated to {slot}."
+admin-reset-price: "{prefix}&aPrice reset to default."
+admin-reload: "{prefix}&aConfigs reloaded."
+admin-search-prompt: "{prefix}&7Enter a keyword on the sign."
+admin-search-set: "{prefix}&aSearch set to &f{query}&a."
+admin-search-cleared: "{prefix}&aSearch cleared."
+admin-search-failed: "{prefix}&cCould not open sign input here."
+
+# GUI text and lore
+gui:
+  # Enabled/disabled status text
+  status-enabled: "&aEnabled"
+  status-disabled: "&cDisabled"
+  # Admin GUI item lore
+  admin-item-lore:
+    - "&7Price: &e{price}{currency}"
+    - "&7Status: {status}"
+    - "&8Left: toggle  Right: set price"
+    - "&8Shift: set slot  Middle: reset"

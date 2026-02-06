@@ -1,0 +1,29 @@
+# Plugin created by mike | https://github.com/PluginSmith07
+
+name: Sellguiplus
+version: '1.0-SNAPSHOT'
+main: org.mik.sellguiplus.Sellguiplus
+api-version: '1.16'
+softdepend: [Vault]
+commands:
+  sellgui:
+    description: Open the Sell GUI.
+    usage: /sellgui
+    permission: sellgui.use
+  sell:
+    description: Quick sell commands.
+    usage: /sell handitem | /sell inventory
+    permission: sellgui.use
+  sellguiadmin:
+    description: Admin SellGUI config editor.
+    usage: /sellguiadmin config|reload|help
+    permission: sellgui.admin
+permissions:
+  sellgui.use:
+    default: true
+  sellgui.admin:
+    default: op
+  sellgui.multiplier.1.5:
+    default: false
+  sellgui.multiplier.2:
+    default: false

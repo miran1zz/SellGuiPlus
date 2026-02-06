@@ -1,0 +1,65 @@
+# Plugin created by mike | https://github.com/PluginSmith07
+
+# Currency provider settings
+currency:
+  # Only VAULT is supported
+  type: VAULT
+  # Currency symbol shown in messages and GUI
+  symbol: "$"
+
+# Economy and safety settings
+economy:
+  # Maximum items to sell per click (0 = unlimited)
+  max-sell-per-click: 2304
+  # Sell cooldown per player in seconds (0 = disabled)
+  cooldown-seconds: 0
+  # Worlds where selling is disabled
+  world-blacklist: []
+  # Items that can never be sold
+  item-blacklist:
+    - BEDROCK
+    - BARRIER
+
+# Permission-based sell multipliers
+multipliers:
+  # sellgui.multiplier.1.5 gives 1.5x
+  - permission: "sellgui.multiplier.1.5"
+    value: 1.5
+  # sellgui.multiplier.2 gives 2x
+  - permission: "sellgui.multiplier.2"
+    value: 2.0
+
+# Sound settings
+sounds:
+  # Enable GUI click and sell success sounds
+  enabled: true
+  # Sound for button clicks
+  gui-click: "UI_BUTTON_CLICK"
+  # Sound for successful sells
+  sell-success: "ENTITY_PLAYER_LEVELUP"
+
+# Visual effects
+effects:
+  title:
+    # Show title on successful sell
+    enabled: true
+    # Title text
+    title: "&aSold!"
+    # Subtitle text (use {amount}, {total}, {currency})
+    subtitle: "&7+{total}{currency}"
+    # Title animation timing
+    fade-in: 5
+    stay: 20
+    fade-out: 5
+  particles:
+    # Spawn particles on successful sell
+    enabled: false
+    # Particle type
+    type: "VILLAGER_HAPPY"
+    # Number of particles
+    count: 12
+    # Particle spread
+    offset: 0.4
+
+# Sellable item list (auto-generated for all materials on first run)
+items: {}

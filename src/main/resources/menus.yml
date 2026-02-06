@@ -1,0 +1,82 @@
+# Plugin created by mike | https://github.com/PluginSmith07
+
+# Player Sell GUI
+sell-gui:
+  # Inventory size (multiple of 9)
+  size: 54
+  # Inventory title
+  title: "&8Sell Chest"
+  # Border material for glass frame
+  border-material: "GRAY_STAINED_GLASS_PANE"
+  # Border name (use single space for clean look)
+  border-name: " "
+
+# Admin editor GUI
+admin-gui:
+  # Inventory size (multiple of 9)
+  size: 54
+  # Inventory title (use {page})
+  title: "&8SellGUI Admin &7(Page {page})"
+  # Border material for frame
+  border-material: "BLACK_STAINED_GLASS_PANE"
+  # Border name (use single space for clean look)
+  border-name: " "
+  # Item slots used for the item list
+  item-slots:
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+  # Previous page button
+  prev-page:
+    slot: 45
+    material: "ARROW"
+    name: "&ePrevious"
+    lore:
+      - "&7Go to the previous page"
+  # Next page button
+  next-page:
+    slot: 53
+    material: "ARROW"
+    name: "&eNext"
+    lore:
+      - "&7Go to the next page"
+  # Search button
+  search:
+    slot: 49
+    material: "OAK_SIGN"
+    name: "&eSearch Items"
+    lore:
+      - "&7Click to search"
+      - "&7Current: &f{query}"
+  # Clear search button
+  search-clear:
+    slot: 50
+    material: "BARRIER"
+    name: "&cClear Search"
+    lore:
+      - "&7Reset current search"
