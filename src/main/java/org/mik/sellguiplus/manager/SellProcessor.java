@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -86,7 +87,7 @@ public class SellProcessor {
         sellCountsAsync(player, counts);
     }
 
-    public void sellFromGui(Player player, ItemStack[] contents, List<Integer> blockedSlots) {
+    public void sellFromGuiConfirmed(Player player, ItemStack[] contents, Set<Integer> blockedSlots) {
         if (!ensureReady(player)) {
             returnItems(player, collectReturnItems(contents, blockedSlots));
             return;
@@ -159,6 +160,47 @@ public class SellProcessor {
                 sendSuccess(player, finalAmount, finalPrice);
             });
         });
+    }
+
+    public double calculateTotal(Player player, ItemStack[] contents, Set<Integer> blockedSlots) {
+        double total = 0.0D;
+        double multiplier = economyManager.getMultiplier(player);
+        int maxPerClick = plugin.getConfig().getInt("economy.max-sell-per-click", 0);
+        int soldAmount = 0;
+
+        for (int i = 0; i < contents.length; i++) {
+            ItemStack stack = contents[i];
+            if (blockedSlots != null && blockedSlots.contains(i)) {
+                continue;
+            }
+            if (stack == null || stack.getType() == Material.AIR) {
+                continue;
+            }
+
+            Material material = stack.getType();
+            if (sellItemManager.isBlacklisted(material)) {
+                continue;
+            }
+
+            SellItem item = sellItemManager.getByMaterial(material);
+            if (item == null || !item.isEnabled()) {
+                continue;
+            }
+
+            int amount = stack.getAmount();
+            if (maxPerClick > 0 && soldAmount + amount > maxPerClick) {
+                amount = Math.max(0, maxPerClick - soldAmount);
+            }
+
+            total += item.getPrice() * amount * multiplier;
+            soldAmount += amount;
+
+            if (maxPerClick > 0 && soldAmount >= maxPerClick) {
+                break;
+            }
+        }
+
+        return total;
     }
 
     private void sellCountsAsync(Player player, Map<Material, Integer> counts) {
@@ -253,7 +295,7 @@ public class SellProcessor {
         }
     }
 
-    private void returnItems(Player player, List<ItemStack> items) {
+    public void returnItems(Player player, List<ItemStack> items) {
         for (ItemStack stack : items) {
             Map<Integer, ItemStack> remaining = player.getInventory().addItem(stack);
             for (ItemStack drop : remaining.values()) {
@@ -262,7 +304,7 @@ public class SellProcessor {
         }
     }
 
-    private List<ItemStack> collectReturnItems(ItemStack[] contents, List<Integer> blockedSlots) {
+    private List<ItemStack> collectReturnItems(ItemStack[] contents, Set<Integer> blockedSlots) {
         List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < contents.length; i++) {
             if (blockedSlots != null && blockedSlots.contains(i)) {

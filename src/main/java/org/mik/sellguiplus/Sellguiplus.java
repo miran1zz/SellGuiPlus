@@ -9,6 +9,7 @@ import org.mik.sellguiplus.command.SellTabCompleter;
 import org.mik.sellguiplus.config.ConfigManager;
 import org.mik.sellguiplus.economy.EconomyManager;
 import org.mik.sellguiplus.gui.AdminGui;
+import org.mik.sellguiplus.gui.ConfirmationGui;
 import org.mik.sellguiplus.gui.SellGui;
 import org.mik.sellguiplus.listeners.ChatListener;
 import org.mik.sellguiplus.listeners.GuiListener;
@@ -30,6 +31,7 @@ public final class Sellguiplus extends JavaPlugin {
     private ChatInputManager chatInputManager;
     private SignInputManager signInputManager;
     private SellGui sellGui;
+    private ConfirmationGui confirmationGui;
     private AdminGui adminGui;
 
     @Override
@@ -48,7 +50,8 @@ public final class Sellguiplus extends JavaPlugin {
         signInputManager = new SignInputManager(this);
         sellProcessor = new SellProcessor(this, economyManager, sellItemManager, cooldownManager);
 
-        sellGui = new SellGui(configManager);
+        sellGui = new SellGui(configManager, sellItemManager);
+        confirmationGui = new ConfirmationGui(configManager);
         adminGui = new AdminGui(this, configManager, sellItemManager, chatInputManager, signInputManager);
 
         getCommand("sell").setExecutor(new SellCommand(this, sellProcessor));
@@ -57,7 +60,7 @@ public final class Sellguiplus extends JavaPlugin {
         getCommand("sellguiadmin").setExecutor(new SellGuiAdminCommand(this, adminGui));
         getCommand("sellguiadmin").setTabCompleter(new SellGuiAdminTabCompleter());
 
-        getServer().getPluginManager().registerEvents(new GuiListener(this, adminGui, sellProcessor), this);
+        getServer().getPluginManager().registerEvents(new GuiListener(this, adminGui, sellProcessor, confirmationGui), this);
         getServer().getPluginManager().registerEvents(new ChatListener(this, chatInputManager, adminGui), this);
         getServer().getPluginManager().registerEvents(new SignListener(this, signInputManager, adminGui), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitListener(chatInputManager, cooldownManager, signInputManager), this);
